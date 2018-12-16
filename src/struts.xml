@@ -1,0 +1,48 @@
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<package name="hello" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="charsetInterceptor" class="cn.itcast.interceptor.CharsetInterceptor"/>
+			<interceptor-stack name="MyDefaultStack">
+				<interceptor-ref name="charsetInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+	
+		<action name="HelloAction_*" class="cn.itcast.action.HelloAction" method="{1}">
+			<result name="success">/success.jsp</result>
+			<result name="login-success">/login-success.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="ParamAction_*" class="cn.itcast.action.ParamAction" method="{1}">
+		</action>
+		
+		<action name="ParamAction2_*" class="cn.itcast.action.ParamAction2" method="{1}">
+		</action>
+		
+		<action name="ParamAction3_*" class="cn.itcast.action.ParamAction3" method="{1}" converter="cn.itcast.convertor.DateConvertor">
+			<result name="input">/test-convertor.jsp</result>
+		</action>
+		
+		<action name="InterceptorAction_*" class="cn.itcast.action.InterceptorAction" method="{1}">
+			<interceptor-ref name="MyDefaultStack"/>
+		</action>
+		
+		<action name="ServletAction_*" class="cn.itcast.action.ServletAction" method="{1}">
+			<result name="test-servlet">/test-servlet.jsp</result>
+		</action>
+		
+		<action name="ServletAction2_*" class="cn.itcast.action.ServletAction2" method="{1}">
+			<result name="test-servlet">/test-servlet.jsp</result>
+		</action>
+		
+		<action name="ServletAction3_*" class="cn.itcast.action.ServletAction3" method="{1}">
+			<result name="test-servlet">/test-servlet.jsp</result>
+		</action>
+	</package>
+</struts>
