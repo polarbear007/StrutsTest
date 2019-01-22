@@ -12,6 +12,10 @@
 			</interceptor-stack>
 		</interceptors>
 		
+		<!-- 通用的异常映射处理，只是演示一下 -->
+		<global-exception-mappings>
+			<exception-mapping result="common-error" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
 	
 		<action name="HelloAction_*" class="cn.itcast.action.HelloAction" method="{1}">
 			<result name="success">/success.jsp</result>
@@ -43,6 +47,17 @@
 		
 		<action name="ServletAction3_*" class="cn.itcast.action.ServletAction3" method="{1}">
 			<result name="test-servlet">/test-servlet.jsp</result>
+		</action>
+		
+		<action name="TestExceptionAction_*" class="cn.itcast.action.TestExceptionAction" method="{1}">
+			<!-- 这个exception-mapping 标签是指定action方法抛出指定类型的异常时，是映射到哪个 result 标签
+				 exception:  指定异常的类型，全路径名
+				 result:     对应本action中的 result 标签，或者 global-results 标签的中的 引用
+			 -->
+			<exception-mapping result="error" exception="java.lang.ArithmeticException"></exception-mapping>
+			<exception-mapping result="error" exception="java.lang.RuntimeException"></exception-mapping>
+			<!-- 指定一下 name 为 error 的result 标签 -->
+			<result name="error">/error.jsp</result>
 		</action>
 	</package>
 </struts>
